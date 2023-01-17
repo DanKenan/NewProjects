@@ -1,3 +1,7 @@
+#A bank demo, that allowing the user to put his money into digital envelopes.
+#Each envelope has is on category, that this money will be spend only on shops that are
+#under this category.
+
 #Parent class. Bank registration demo, asking for user info and deposit.
 class Bank():
     all = {}
