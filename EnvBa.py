@@ -34,7 +34,7 @@ class Bank():
         self.balance = self.balance + self.amount
         print("Account balance has been  updated : $", self.balance)
 
-#Not using it in this example. It allowing the user to withdraw money from his account.
+#Allowing the user to withdraw money from his main account.
     def withdraw(self, amount):
 
         self.amount = amount
@@ -63,7 +63,7 @@ class Envelope(Bank):
     self.envelope = envelope
     self.env_deposit = env_deposit
 
-#Adding to dictionry "all"
+#Adding to dictionry "all" the envelopes. To be able to write the env_transfer function that coming up.
     Bank.all[envelope] = env_deposit
 
 #Envelope creation setup. Checking that the envelopes deposit are not bigger than avaliable balance.
@@ -80,7 +80,7 @@ class Envelope(Bank):
       return f"Envelope: {self.envelope}, {self.env_deposit}"
 
 
-# Function to transfer money from one envelope to the other. Not using it in this examaple for now.
+# Function to transfer money from one envelope to the other or from main balance.
 
   def env_transfer (self, from_env, amount, to_env):
 
@@ -213,14 +213,24 @@ price = float(input("How much did you paid : "))
 assert price >0, "Only positive numbers are allowed"
 b.buying_system(store, price)
 
-#While loop, to continue the program until he decied to quit.
+#While loop, asking to continue the program until decied to quit.
+#Asking if you like to buy anything more or transfer from an envelope or main balance to the other or withdraw put from main.
 active = True
 while active == True:
-  finish = input("Anything else that you want to buy? (y/n) ").lower()
-  if finish == "y":
+  finish = input("Is there nything else? (buy/transfer/withdraw/quiet) ").lower()
+  if finish == "buy":
     store = input("What store are you buying from : ").title()
     price = float(input("How much did you paid : "))
     b.buying_system(store, price)
+  elif finish == "transfer" :
+    transfer_from = input("Transfering from: ").title()
+    t_amount = int(input("Transfer amount: "))
+    transfer_to = input("Transfering to: ").title()
+    b.env_transfer(transfer_from, t_amount, transfer_to)
+
+  elif finish == "withdraw":
+    w_amount  = int(input("Withdraw amount: "))
+    b.withdraw(w_amount)
 
   else:
     print("Ok, see you next time!")
